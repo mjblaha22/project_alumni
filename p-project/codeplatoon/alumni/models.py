@@ -8,6 +8,10 @@ class Users(models.Model):
     last_name = models.CharField(max_length=200)
     password = models.CharField(max_length=200)
 
+    def __str__(self):
+        return f"id={self.id}, user_name={self.user_name}, first_name={self.first_name}, last_name={self.last_name}, password={self.password}"
+
+
 class Events(models.Model):
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='events')
     event_name = models.CharField(max_length=200)
@@ -17,30 +21,49 @@ class Events(models.Model):
     state = models.CharField(max_length=2)
     zipcode = models.TextField(max_length=5)
 
+    def __str__(self):
+        return f"id={self.id}, user_id={self.user_id}, event_name={self.event_name}, date_start={self.date_start}, time_start={self.time_start}, street_address={self.street_address}, state={self.state}, zipcode={self.zipcode}"
+
 class Messages(models.Model):
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='messages')
     response_id = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='responses')
     message = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return f"id={self.id}, user_id={self.user_id}, response_id={self.response_id}, message={self.message}"
 
 class Businesses(models.Model):
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='businesses')
     review_id = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='review')
     business_name = models.CharField(max_length=200)
 
+    def __str__(self):
+        return f"id={self.id}, user_id={self.user_id}, review_id={self.review_id}, business_name={self.business_name}"
+
 class Locations(models.Model):
     business_id = models.ForeignKey(Businesses, on_delete=models.CASCADE, related_name='locations')
     event_id = models.ForeignKey(Events, on_delete=models.CASCADE, related_name='eventlocations')
+
+    def __str__(self):
+        return f"id={self.id}, business_id={self.business_id}, event_id={self.event_id}"
 
 class Emails(models.Model):
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='emails')
     email = models.CharField(max_length=200)
 
+    def __str__(self):
+        return f"id={self.id}, email={self.email}"
+
 class Responses(models.Model):
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='userresponse')
     message_id = models.ForeignKey(Messages, on_delete=models.CASCADE, related_name='messageresponse')
+
+    def __str__(self):
+        return f"id={self.id}, user_id={self.user_id}, message_id={self.message_id}"
     
 class User_Business(models.Model):
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='userbusiness')
-    business_id = models.ForeignKey(Businesses, on_delete=models.CASCADE, related_name='businessuser')   
-    # def __str__(self):
-    #     return str(self.did_win)
+    business_id = models.ForeignKey(Businesses, on_delete=models.CASCADE, related_name='businessuser')
+
+    def __str__(self):
+        return f"id={self.id}, user_id={self.user_id}, business_id={self.business_id}"
