@@ -39,11 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core.apps.CoreConfig',
     'django_extensions',
     'rest_framework',
     'corsheaders',
-    'alumni',
+    'alumni.apps.AlumniConfig',
 ]
 
 MIDDLEWARE = [
@@ -118,6 +117,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'codeplatoon.utils.my_jwt_response_handler'
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
