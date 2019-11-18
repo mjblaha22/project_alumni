@@ -1,0 +1,56 @@
+{
+  "name": "p-project-frntend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "compression": "^1.7.3",
+    "concurrently": "^4.1.0",
+    "cors": "^2.8.5",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
+    "enzyme-to-json": "^3.3.5",
+    "fetch-mock": "^7.3.1",
+    "helmet": "^3.16.0",
+    "isomorphic-fetch": "^2.2.1",
+    "loopback": "^3.25.0",
+    "loopback-boot": "^2.27.1",
+    "loopback-component-explorer": "^6.3.1",
+    "loopback-connector-postgresql": "^3.6.0",
+    "loopback-remote-routing": "^1.5.2",
+    "node-fetch": "^2.3.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.11.0",
+    "react-bootstrap": "^0.32.4",
+    "react-dom": "^16.11.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "3.2.0",
+    "react-test-renderer": "^16.8.4",
+    "react-test-utils": "0.0.1",
+    "reactstrap": "^8.1.1",
+    "serve-favicon": "^2.5.0",
+    "sinon": "^7.2.7",
+    "strong-error-handler": "^3.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
