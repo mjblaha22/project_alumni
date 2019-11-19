@@ -1,34 +1,33 @@
-import React, { useEffect, useState } from 'react';
-// import { DropdownButton, Dropdown } from 'react-bootstrap';
+import React, { Component } from 'react';
 // import { Form, FormGroup, Input } from 'reactstrap';
-import LocationPage from './LocationPage.js'
+// import images from '../config/images.json'
+
+import EventsList from '../components/EventsList.js'
 import Api from '../Api/UserAPI.js'
+import { element } from 'prop-types';
 
-const EventsPage = () => {
-  const [eventinfo, theEventInfo] = useState(0);
 
-  const events = async () => {
-    const event = await Api.fetchEvent()
-    if (eventinfo === 0) {
-      theEventInfo(event)
-    }
+class EventsPage extends Component {
+  state = {
+    events: null,
   }
-  useEffect(() => {
-    events()
-  })
-  if (eventinfo) {
-    console.log(eventinfo)
-    console.log(eventinfo['0'])
-    console.log(eventinfo[0].event_name)
+  componentDidMount() {
+    Api.fetchEvent()
+      .then(data => {
+        this.setState({
+          events: data
+        })
+        console.log(data)
+      })
   }
-  return (
-    <div>
-      <p>Event Name {eventinfo && eventinfo[0].event_name}</p>
-      <LocationPage/>
-      <p>Date {eventinfo && eventinfo[0].date_start}</p>
-      <p>Start Time {eventinfo && eventinfo[0].time_start}</p>
-    </div>
-  );
+  render() {
+    return (
+      <div>
+        <h3>ALL EVENTS</h3>
+        <EventsList events={this.state.events} />
+      </div>
+    );
+  }
 }
 
 export default EventsPage;

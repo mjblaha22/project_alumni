@@ -1,15 +1,24 @@
-const proxy = 'https://cors-anywhere.herokuapp.com/'
+// const proxy = 'https://alumni-anywhere.herokuapp.com/'
 const api_key = 'AIzaSyCaDPBcfpJigzgP8MfVvqheXApsyyge1_A'
 
 const fetchProfile = async (userid) => {
-  let profile = await fetch(`http://localhost:8000/user/user/${userid}/`)
+  // console.log(token)
+  let profile = await fetch(`http://localhost:8000/alumni/user/${userid}`) 
   .then(res => res.json())
   .then(data => data)
+  console.log(profile)
   return profile
 }
 
+const fetchAllAlumni = async () => {
+  let users = await fetch(`http://localhost:8000/alumni/user/`)
+  .then(res => res.json())
+  .then(data => data)
+  return users
+}
+
 const fetchEvent = async () => {
-  let eventlist = await fetch(`http://localhost:8000/user/events/`)
+  let eventlist = await fetch(`http://localhost:8000/alumni/events/`)
   .then(res => res.json())
   .then(data => data)
   return eventlist
@@ -23,7 +32,8 @@ const fetchBusiness = async () => {
 }
 
 const fetchLocation = async (map) => {
-  let name = map.location_name.replace(' ', '+')
+  console.log(map)
+  let name = map.event_place.replace(' ', '+')
   console.log(name)
   let address = map.street_address.replace(' ', '+')
   console.log(address)
@@ -40,7 +50,12 @@ const fetchMessage = async () => {
   .then(data => data)
   return message
 }
-
+// headers: {
+//   'Content-Type': 'application/json',
+//   'Authorization': token
+// }
+// })
+// console.log(profile)
 // const addTable = (tableObject, token) => {
 //   return fetch(`${url}/tables`, {
 //     headers: {
@@ -65,5 +80,6 @@ export default {
   fetchEvent: fetchEvent,
   fetchLocation: fetchLocation,
   fetchBusiness: fetchBusiness,
-  fetchMessage: fetchMessage
+  fetchMessage: fetchMessage,
+  fetchAllAlumni: fetchAllAlumni
 }

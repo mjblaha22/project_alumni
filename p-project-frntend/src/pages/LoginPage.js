@@ -1,115 +1,78 @@
-import React, { Component } from 'react';
-import Nav from '../components/Nav';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import App from '../App';
-import LoginForm from '../components/LoginForm';
-import SignupForm from '../components/SignupForm';
+import Api from '../Api/UserAPI.js'
+import { userInfo } from 'os';
 
-class LoginPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      displayed_form: '',
-      logged_in: localStorage.getItem('token') ? true : false,
-      username: ''
-    };
-  }
-
-  async componentDidMount() {
-    if (this.state.logged_in) {
-      fetch('http://localhost:8000/alumni/current_user/', {
-        headers: {
-          Authorization: `JWT ${localStorage.getItem('token')}`
-        }
-      })
-        .then(res => res.json())
-        .then(json => {
-          this.setState({ username: json.username });
-        });
+const Login = (props) => {
+  const [usersinfo, setUsersInfo] = useState(0);
+  const [userName, setUserName] = useState(0)
+  const [userPass, setUserPass] = useState(0)
+  console.log(props)
+  const profileSubmit = (event) => {
+    event.preventDefault()
+    let user_name = event.target.user_name.value
+    let password = event.target.password.value
+    if (userName === 0 & userPass === 0) {
+      setUserName(user_name)
+      setUserPass(password)
     }
   }
-
-  handle_login = async (e, data) => {
-    e.preventDefault();
-    await fetch('http://localhost:8000/token-auth/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-      .then(res => res.json())
-      .then(json => {
-        localStorage.setItem('token', json.token);
-        this.setState({
-          logged_in: true,
-          displayed_form: '',
-          username: json.user.username
-        });
-      });
-  };
-
-  handle_signup = (e, data) => {
-    e.preventDefault();
-    fetch('http://localhost:8000/alumni/users/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-      .then(res => res.json())
-      .then(json => {
-        localStorage.setItem('token', json.token);
-        this.setState({
-          logged_in: true,
-          displayed_form: '',
-          user_name: json.username
-        });
-      });
-  };
-
-  handle_logout = () => {
-    localStorage.removeItem('token');
-    this.setState({ logged_in: false, username: '' });
-  };
-
-  display_form = form => {
-    this.setState({
-      displayed_form: form
-    });
-  };
-
-  render() {
-    let form;
-    switch (this.state.displayed_form) {
-      case 'login':
-        form = <LoginForm handle_login={this.handle_login} />;
-        break;
-      case 'signup':
-        form = <SignupForm handle_signup={this.handle_signup} />;
-        break;
-      default:
-        form = null;
+  const profiles = async () => {
+    const profileinfo = await Api.fetchAllAlumni()
+    if (usersinfo === 0) {
+      setUsersInfo(profileinfo)
     }
-
-    return (
-      <div className="App">
-
-        <Nav
-          logged_in={this.state.logged_in}
-          display_form={this.display_form}
-          handle_logout={this.handle_logout}
-        />
-        {form}
-        <h3>
-          {this.state.logged_in
-            ? `Hello, ${this.state.username}`
-            : 'Please Log In'}
-        </h3>
-      </div>
-    );
   }
+  useEffect(() => {
+    profiles()
+  })
+  for (let i = 0; i < usersinfo.length; i++) {
+    if (usersinfo[i].user_name == userName && usersinfo[i].password == userPass) {
+      return 
+    } else {
+      console.log('nope')
+    }
+  }
+  console.log(userName)
+  console.log(userPass)
+  console.log(usersinfo)
+
+  // props.usrCallback(user_name)
+  // console.log(user_name, password)
+  // window.localStorage.setItem('login', 'true')
+  // this.props.history.push('/')
+
+
+  return (
+    <div>
+      <Form onSubmit={profileSubmit} method="GET" id='test'>
+        <FormGroup>
+          <Label for="user_name" className="col-2 ml-3">Username</Label>
+          <Input type="text" name="user_name" id="user_name" className="col-6 ml-3" placeholder="Sledge" />
+        </FormGroup>
+        <FormGroup>
+          <Label for="password" className="col-2 ml-3">Password</Label>
+          <Input type="password" name="password" id="password" className="col-6 ml-3" placeholder="codeplatoon" />
+        </FormGroup>
+        <Button type='submit' className="col-6 ml-3" form='test' >Submit</Button>
+      </Form>
+      <a style={{ margin: '20px' }} href='/'>Back</a>
+    </div>
+  );
 }
-export default LoginPage;
+
+
+export default Login;
+
+  // const profiles = async () => {
+  //   const profileinfo = await Api.fetchAllAlumni()
+  //   if (usersinfo === 0){
+  //     theUsersInfo(profileinfo)
+  //   }
+  // }
+  // useEffect(() => {
+  //   profiles()
+  //   // console.log(login())
+  //   console.log(usersinfo)
+  // })

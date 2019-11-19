@@ -1,0 +1,18 @@
+[
+  {
+    "label": "PROFILE",
+    "value": "profile"
+  },
+  {
+    "label": "ALUMNI",
+    "value": "alumni"
+  },
+  {
+    "label": "EVENTS",
+    "value": "events"
+  },
+  {
+    "label": "BUSINESS",
+    "value": "business"
+  }
+]

@@ -18,8 +18,9 @@ class LoginForm extends React.Component {
   };
 
   render() {
+    console.log("LOGIN FORM: ", this.props.handleLogin)
     return (
-      <form onSubmit={e => this.props.handle_login(e, this.state)}>
+      <form onSubmit={e => this.props.handleLogin(e, this.state)}>
         <h4>Log In</h4>
         <label htmlFor="username">Username</label>
         <input
