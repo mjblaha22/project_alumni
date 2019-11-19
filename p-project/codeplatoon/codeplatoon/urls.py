@@ -22,5 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('alumni/', include('alumni.urls')),
     url('login/', include('rest_framework.urls')),
-    path('token-auth/', obtain_jwt_token),
+    # path('token-auth/', obtain_jwt_token),
 ]
