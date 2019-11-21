@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import { DropdownButton, Dropdown } from 'react-bootstrap';
 // import { Form, FormGroup, Input } from 'reactstrap';
-import Api from '../Api/UserAPI.js'
+import Api from '../../Api/UserAPI.js'
 
 const BusinessPage = () => {
   const [businessinfo, setBusinessInfo] = useState(0);

@@ -5,7 +5,7 @@ import LocationPage from '../pages/LocationPage.js'
 function ProfileTeaser({ id, user_name, first_name, last_name, cohort, business_name, street_address, state, city, profile_image }) {
   let full_name = (first_name + ' ' + last_name)
   return (
-    
+    <div>
     <div className='profile-teaser-container'>
       <LocationPage event_place={business_name} street_address={street_address} city={city} state={state}/>
       <img src={profile_image}></img>
@@ -13,6 +13,11 @@ function ProfileTeaser({ id, user_name, first_name, last_name, cohort, business_
       <h1>Cohort:{cohort}</h1>
       <h1>{business_name}</h1>
     </div>
+    <div>
+      <hr/>
+      </div>
+      </div>
+
   )
 }
 

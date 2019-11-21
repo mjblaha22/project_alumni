@@ -1,11 +1,14 @@
 import React from 'react';
 // import navItems from '../config/navbar.json';
-import { Link } from 'react-router-dom';
+import { Link, onClick } from 'react-router-dom';
 import Container from 'react-bootstrap/Container'
 import { Navbar, Nav, Row, Col } from 'react-bootstrap';
 // import images from '../../config/images.json'
 function AppNav({ handleNavClick }) {
-  
+  const logout = () => {
+    localStorage.clear()
+    console.log('not working')
+  }
   // const createNavItems = () => {
   //   const sections = navItems.map((navItem, i) => {
   //     return 
@@ -18,6 +21,8 @@ function AppNav({ handleNavClick }) {
       <button><a className="nav-link nav-button" href="/">HOME</a></button>
       <button><a className="nav-link" href="/alumni">ALUMNI</a></button>
       <button><a className="nav-link disabled" href="/events" tabindex="-1" aria-disabled="true">EVENTS</a></button>
+      <button><a className="nav-link disabled" href="/addlocation" tabindex="-1" aria-disabled="true">POST EVENT</a></button>
+      <Link to='/'><button onClick={logout} >LOGOUT</button></Link>
     </nav>
 
   );

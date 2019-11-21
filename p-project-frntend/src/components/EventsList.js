@@ -3,6 +3,7 @@ import EventTeaser from './EventTeaser.js'
 
 
 class EventList extends Component {
+
   render() {
     let { events, handleTitleClick } = this.props;
     const createTeaserEvents = () => {

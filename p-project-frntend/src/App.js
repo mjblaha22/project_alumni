@@ -9,12 +9,25 @@ import AllProfiles from './pages/AllProfiles';
 import AddLocation from './pages/AddLocation.js'
 import EventsPage from './pages/EventsPage.js';
 import LocationPage from './pages/LocationPage.js';
-import BusinessPage from './pages/BusinessPage.js';
-import MessagesPage from './pages/MessagesPage.js';
 import { userInfo } from 'os';
 
+const useStateWithLocalStorage = localStorageKey => {
+  const [value, setValue] = React.useState(
+    localStorage.getItem(localStorageKey) || ''
+  );
+  React.useEffect(() => {
+    localStorage.setItem(localStorageKey, value);
+  }, [value]);
+  return [value, setValue];
+};
+
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState(true)
+  const [loggedIn, setLoggedIn] = useStateWithLocalStorage(
+    'myValueInLocalStorage'
+  );
+  const [localId, setLocalId] = useStateWithLocalStorage(
+    'myValueInLocalStorage'
+  );
   const [userName, setUserName] = useState(0)
   const [userPass, setUserPass] = useState(0)
   const [usersinfo, setUsersInfo] = useState(0)
@@ -26,27 +39,23 @@ const App = () => {
     let password = event.target.password.value
     if (userPass === 0) {
       setUserPass(password)
-
-      // setLoggedIn(true)
     }
     if (userName === 0) {
       setUserName(user_name)
     }
-    console.log(password)
-    console.log(userName)
   }
   const profiles = async () => {
     const profileinfo = await Api.fetchAllAlumni()
     if (usersinfo === 0) {
-
       setUsersInfo(profileinfo)
     }
   }
   const userCheck = () => {
-    if (loggedIn === false) {
+    if (!loggedIn) {
       for (let i = 0; i < usersinfo.length; i++) {
         if (usersinfo[i].user_name == userName && usersinfo[i].password == userPass) {
           setUserId(i)
+          setLocalId(i)
           setLoggedIn(true)
         } else {
           console.log('nope')
@@ -80,7 +89,6 @@ const App = () => {
       </div>
     );
   } else {
-    console.log('dude')
     return (
       <div>
         <Router>
@@ -88,20 +96,11 @@ const App = () => {
             <div>
               <UserNav />
             </div>
-            <div>
-              <Route exact path='/' render={(props) => <ProfilePage {...props} userid={userid + 1} loggedIn={loggedIn} />} />
-            </div>
-            <div>
-              <Route exact path="/alumni" component={AllProfiles} />
-            </div>
+            <Route exact path='/' render={(props) => <ProfilePage {...props} userid={userid + 1} loggedIn={loggedIn} />} />
+            <Route exact path="/alumni" component={AllProfiles} />
             <Route exact path="/events" component={EventsPage} />
-            <Route exact path="/business" component={BusinessPage} />
-            <Route exact path="/addlocation" component={AddLocation} />
-            <Route exact path="/business/location" component={LocationPage} />
-            <div>
-              <Route exact path="/messages" component={MessagesPage} />
+            <Route exact path="/addlocation" render={(props) => <AddLocation {...props} userid={userid + 1} loggedIn={loggedIn} localId={localId} />} />
             </div>
-          </div>
         </Router>
       </div>
     );
