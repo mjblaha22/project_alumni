@@ -1,9 +1,11 @@
 // const proxy = 'https://alumni-anywhere.herokuapp.com/'
+{/* <script src="https://code.responsivevoice.org/responsivevoice.js?key=IE4XUNg5"></script> */}
+const url = `http://localhost:8000/alumni/user/`
+const api_two = 'AIzaSyCQNsn0rFbQvmf5ug7_xna1_iP6kMReNUI'
 const api_key = 'AIzaSyCaDPBcfpJigzgP8MfVvqheXApsyyge1_A'
 
 const fetchProfile = async (userid) => {
-  // console.log(token)
-  let profile = await fetch(`http://localhost:8000/alumni/user/${userid}`) 
+  let profile = await fetch(`http://localhost:8000/alumni/user/${userid}/`) 
   .then(res => res.json())
   .then(data => data)
   console.log(profile)
@@ -32,13 +34,9 @@ const fetchBusiness = async () => {
 }
 
 const fetchLocation = async (map) => {
-  console.log(map)
   let name = map.event_place.replace(' ', '+')
-  console.log(name)
   let address = map.street_address.replace(' ', '+')
-  console.log(address)
   let city = map.city.replace(' ', '+')
-  console.log(city)
   let state = map.state.replace(' ', '+')
   let location = `https://www.google.com/maps/embed/v1/search?q=+${name},+${address},+${city},+${state},+USA&key=${api_key}`
   return location
@@ -49,6 +47,12 @@ const fetchMessage = async () => {
   .then(res => res.json())
   .then(data => data)
   return message
+}
+const fetchSearch = (search) => {
+  let alumni = fetch(`${url}?filter={"where":{"title":{"ilike":"${search}"}}}`)
+  .then(res => res.json())
+  .then(data => data)
+  return alumni
 }
 // headers: {
 //   'Content-Type': 'application/json',

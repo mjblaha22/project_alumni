@@ -7,13 +7,13 @@ class ProfileList extends Component {
     let { profiles, handleTitleClick } = this.props;
     const createTeaserProfiles = () => {
       return profiles.map((profile, id) => {
-        console.log(profile)
         return <ProfileTeaser
           key={id}
           id={id}
           user_name={profile.user_name}
           first_name={profile.first_name}
           last_name={profile.last_name}
+          cohort={profile.cohort}
           business_name={profile.business_name}
           street_address={profile.street_address}
           city={profile.city}

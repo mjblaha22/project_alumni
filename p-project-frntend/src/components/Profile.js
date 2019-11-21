@@ -2,6 +2,7 @@ import React from 'react';
 
 function Profile({ first_name, last_name, cohort, business_name, street_address, city, state, zipcode, profile_image }) {
   return (
+    
     <div>
       <h1>{first_name}</h1><h1>{last_name}</h1>
       <h1>{cohort}</h1>

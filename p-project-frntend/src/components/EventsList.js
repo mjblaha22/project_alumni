@@ -7,13 +7,12 @@ class EventList extends Component {
     let { events, handleTitleClick } = this.props;
     const createTeaserEvents = () => {
       return events.map((event, id) => {
-        console.log(event)
         return <EventTeaser
           key={id}
           id={event.user_id}
           event_place={event.event_place}
-          event_name={event.event_name}
-          start_date={event.start_date}
+          event_discription={event.event_discription}
+          start_date={event.date_start}
           time_start={event.time_start}
           street_address={event.street_address}
           city={event.city}

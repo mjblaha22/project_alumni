@@ -12,10 +12,8 @@ const LocationPage = (props) => {
     city: props.city,
     state: props.state,
   }
-  console.log(props.event_place)
   const location = async (props) => {
     const locateinfo = await Api.fetchLocation(props)
-    console.log(locateinfo)
     if (locationinfo === 0) {
       setLocationInfo(locateinfo)
     }
@@ -23,7 +21,6 @@ const LocationPage = (props) => {
   useEffect(() => {
     location(props)
   })
-  console.log(locationinfo)
   return (
     <div>
       <iframe

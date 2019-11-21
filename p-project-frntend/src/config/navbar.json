@@ -1,9 +1,5 @@
 [
   {
-    "label": "PROFILE",
-    "value": "profile"
-  },
-  {
     "label": "ALUMNI",
     "value": "alumni"
   },
@@ -12,7 +8,7 @@
     "value": "events"
   },
   {
-    "label": "BUSINESS",
-    "value": "business"
+    "label": "ADD-LOCATION",
+    "value": "addlocation"
   }
 ]

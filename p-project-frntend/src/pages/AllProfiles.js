@@ -17,7 +17,6 @@ class AllProfiles extends Component {
         this.setState({
           profiles: data
         })
-        console.log(data)
       })
   }
   render() {
