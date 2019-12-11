@@ -1,3 +1,5 @@
+
+
 .App {
   margin-left: 20px;
 }
@@ -24,9 +26,10 @@ input {
   position: left;
 }
 body {
-  background-image: url('http://www.baltana.com/files/wallpapers-14/Earth-Background-Wallpaper-36766.jpg');
+  background-image: url("Earth-Background-Wallpaper-36766 copy.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
+  /* background-color: black; */
 }
 .App-logo {
   height: 40vmin;
@@ -45,8 +48,7 @@ iframe {
 	top:0;
 	bottom: 0;
 	left: 0;
-	right: 0;
-  	
+	right: 0; 	
 	margin: auto;
 }
 .locationform {

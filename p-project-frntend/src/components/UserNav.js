@@ -6,8 +6,9 @@ import { Navbar, Nav, Row, Col } from 'react-bootstrap';
 // import images from '../../config/images.json'
 function AppNav({ handleNavClick }) {
   const logout = () => {
-    localStorage.clear()
     console.log('not working')
+    localStorage.clear()
+    window.location.reload()
   }
   // const createNavItems = () => {
   //   const sections = navItems.map((navItem, i) => {

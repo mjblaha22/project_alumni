@@ -7,7 +7,7 @@ const api_two = 'AIzaSyCQNsn0rFbQvmf5ug7_xna1_iP6kMReNUI'
 const api_key = 'AIzaSyCaDPBcfpJigzgP8MfVvqheXApsyyge1_A'
 
 const fetchProfile = async (userid) => {
-  let profile = await fetch(`http://localhost:8000/alumni/user/${userid}/`) 
+  let profile = await fetch(`http://localhost:8000/alumni/user/${userid+1}/`) 
   .then(res => res.json())
   .then(data => data)
   return profile
@@ -35,7 +35,14 @@ const addEvent = (newEventObject) => {
     body: JSON.stringify(newEventObject)
   })
 }
-
+const deleteEvent = (event) => {
+  return fetch(`http://localhost:8000/alumni/events/${event}`, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'DELETE',
+  })
+}
 const fetchLocation = async (map) => {
   let name = map.event_place.replace(' ', '+')
   let address = map.street_address.replace(' ', '+')
@@ -63,5 +70,6 @@ export default {
   fetchProfile: fetchProfile,
   fetchEvent: fetchEvent,
   fetchLocation: fetchLocation,
-  fetchAllAlumni: fetchAllAlumni
+  fetchAllAlumni: fetchAllAlumni,
+  deleteEvent: deleteEvent,
 }

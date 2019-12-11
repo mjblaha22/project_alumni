@@ -26,7 +26,7 @@ const App = () => {
     'myValueInLocalStorage'
   );
   const [localId, setLocalId] = useStateWithLocalStorage(
-    'myValueInLocalStorage'
+    'myUserInLocalStorage'
   );
   const [userName, setUserName] = useState(0)
   const [userPass, setUserPass] = useState(0)
@@ -85,7 +85,6 @@ const App = () => {
           </FormGroup>
           <Button type='submit' className="col-6 ml-3" form='test' >Submit</Button>
         </Form>
-        {/* <a style={{ margin: '20px' }} href='/'>Back</a> */}
       </div>
     );
   } else {
@@ -96,7 +95,7 @@ const App = () => {
             <div>
               <UserNav />
             </div>
-            <Route exact path='/' render={(props) => <ProfilePage {...props} userid={userid + 1} loggedIn={loggedIn} />} />
+            <Route exact path='/' render={(props) => <ProfilePage userid={userid} loggedIn={loggedIn} />} />
             <Route exact path="/alumni" component={AllProfiles} />
             <Route exact path="/events" component={EventsPage} />
             <Route exact path="/addlocation" render={(props) => <AddLocation {...props} userid={userid + 1} loggedIn={loggedIn} localId={localId} />} />
@@ -107,71 +106,3 @@ const App = () => {
   }
 }
 export default App;
-// state = {
-//   user_name : null,
-//   loggedIn : false,
-//   // displayedForm : null,
-// }
-
-
-// handleLogin = async (e, data) => {
-//   e.preventDefault();
-//   await fetch('http://localhost:8000/alumni/user/', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(data)
-//   })
-//     .then(res => res.json())
-//     .then(json => {
-//       user = "authenticated"
-//       localStorage.setItem('token', json.token);
-//       this.setState({
-//         loggedIn: true,
-//         // displayed_form: '',
-//         user_name: json.user.user_name
-//       });
-
-//     });
-// };
-
-// handleLogout = () => {
-//   console.log("HERE")
-//   localStorage.removeItem('token');
-//   this.setState({
-//     loggedIn: false,
-//     user_name: ''
-//   });
-// };
-// render ()  {
-//   console.log(localStorage)
-//   console.log(user)
-//   console.log("APP STATEP ", this.state)
-//   const renderLoginPage = (props) => {
-//     return (
-//       <LoginPage
-//         history={props.history}
-//         handleLogin={this.handleLogin}
-//         userName={this.state.user_name}
-//         loggedIn={this.state.loggedIn}
-//         handleLogout={this.handleLogout}
-//         />
-//     )
-//   }
-//   const renderProfilePageTwo = (props) => {
-//     return (
-//       <ProfilePageTwo
-//         history={props.history}
-//         handleLogin={this.handleLogin}
-//         userName={this.state.user_name}
-//         loggedIn={this.state.loggedIn}
-//         />
-//     )
-//   }
-
-{/* <ProfilePage user={user}/> */ }
-{/* <EventsPage />
-<LocationPage map={location} />
-<BusinessPage busi={business} /> */}
-{/* <Route exact path="/login" component={Login} /> */ }

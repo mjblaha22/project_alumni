@@ -38,12 +38,6 @@ const Login = (props) => {
   console.log(userPass)
   console.log(usersinfo)
 
-  // props.usrCallback(user_name)
-  // console.log(user_name, password)
-  // window.localStorage.setItem('login', 'true')
-  // this.props.history.push('/')
-
-
   return (
     <div>
       <Form onSubmit={profileSubmit} method="GET" id='test'>

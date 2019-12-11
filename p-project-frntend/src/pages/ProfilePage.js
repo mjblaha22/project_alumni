@@ -7,10 +7,10 @@ import Api from '../Api/UserAPI.js'
 // import App from '../App.js'
 
 const ProfilePage = (props) => {
-  const [userinfo, theUserInfo] = useState(0);
+  const [userinfo, theUserInfo] = useState('');
   const profile = async () => {
     const profileinfo = await Api.fetchProfile(props.userid)
-    if (userinfo === 0) {
+    if (userinfo === '') {
       theUserInfo(profileinfo)
     }
   }
