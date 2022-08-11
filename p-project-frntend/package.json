@@ -19,7 +19,7 @@
     "loopback": "^3.25.0",
     "loopback-boot": "^2.27.1",
     "loopback-component-explorer": "^6.3.1",
-    "loopback-connector-postgresql": "^3.6.0",
+    "loopback-connector-postgresql": "^5.5.1",
     "loopback-remote-routing": "^1.5.2",
     "node-fetch": "^2.3.0",
     "prop-types": "^15.7.2",
